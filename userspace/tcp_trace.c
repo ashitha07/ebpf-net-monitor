@@ -50,23 +50,12 @@ static int handle_event(void *ctx, void *data, size_t data_sz)
     (e->saddr >> 16) & 0xFF,
     (e->saddr >> 8)  & 0xFF,
     	e->saddr & 0xFF);
-    if (e->connection_event) {
-        printf("%-8s %-5s %-16s %-7d %-7d %-8s %-7d %-8s", 
-                ts, "TCP CONNECT", e->comm, 
-               e->pid,e->dport,
-               dst_ip,
-               e->sport,
-               src_ip);
-        printf("\n");
-    } else {
-        printf("%-8s %-5s %-16s %-7d %-7d %-8s %-7d %-8s", 
-               ts, "TCP CLOSE", e->comm, 
-               e->pid,e->dport,
-               dst_ip,
-               e->sport,
-               src_ip);
-        printf("\n");
-    }
+    char *event_type = e->connection_event ? "TCP CONNECT" : "TCP CLOSE";
+    printf("{\"timestamp\":\"%s\",\"event\":\"%s\",\"comm\":\"%s\","
+            "\"pid\":%d,\"dst_port\":%d,\"dst_ip\":\"%s\","
+            "\"src_port\":%d,\"src_ip\":\"%s\"}\n",
+            ts, event_type, e->comm, e->pid, 
+            e->dport, dst_ip, e->sport, src_ip);
     if (e->connection_event) {
         detect_portscan(e->daddr, e->dport);
     }
@@ -108,8 +97,7 @@ int main(int argc, char **argv)
         goto cleanup;
     }
     /* Process events */
-    printf("%-8s %-5s %-16s %-7s %-7s %-8s %-7s %-8s\n", "TIME", "EVENT", "COMM", "PID",
-           "DESTINATION PORT","DESTINATION ADDRESS","SOURCE PORT","SOURCE ADDRESS");
+
     while (!exiting) {
         err = ring_buffer__poll(rb, 100 /* timeout, ms */);
         /* Ctrl-C will cause -EINTR */
