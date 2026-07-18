@@ -33,7 +33,8 @@ sudo ./examples/c/tcp_trace
 - [x] kprobe attached to `tcp_connect()`
 - [x] Extracts src/dst IP and port from `struct sock` via BPF CO-RE
 - [x] Ring buffer map for kernel→userspace event passing
-- [x] Userspace ring buffer reader with structured output
+- [x] Userspace ring buffer reader with structured JSON output
 - [x] Port scan detection with cooldown mechanism
-- [ ] OpenSearch export (next)
-- [ ] iptables auto-blocking
+- [x] OpenSearch export with daily index rotation
+- [x] Memory management: stale entry TTL cleanup
+- [ ] iptables auto-blocking (next)
