@@ -34,6 +34,6 @@ sudo ./examples/c/tcp_trace
 - [x] Extracts src/dst IP and port from `struct sock` via BPF CO-RE
 - [x] Ring buffer map for kernel→userspace event passing
 - [x] Userspace ring buffer reader with structured output
-- [ ] Port scan detection (next)
-- [ ] OpenSearch export
+- [x] Port scan detection with cooldown mechanism
+- [ ] OpenSearch export (next)
 - [ ] iptables auto-blocking
