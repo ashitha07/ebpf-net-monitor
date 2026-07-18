@@ -8,6 +8,8 @@ echo "Copying source files..."
 cp $SRC/kernel/tcp_trace.bpf.c $BUILD/
 cp $SRC/kernel/tcp_trace.h $BUILD/
 cp $SRC/userspace/tcp_trace.c $BUILD/
+cp $SRC/userspace/detector.c $BUILD/
+cp $SRC/userspace/detector.h $BUILD/
 
 echo "Building..."
 make -C $BUILD tcp_trace

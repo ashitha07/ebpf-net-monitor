@@ -13,6 +13,7 @@
 #include <stdbool.h>
 #include "tcp_trace.h"
 #include "tcp_trace.skel.h"
+#include "detector.h"
 
 static int libbpf_print_fn(enum libbpf_print_level level, const char *format, va_list args)
 {
@@ -65,6 +66,9 @@ static int handle_event(void *ctx, void *data, size_t data_sz)
                e->sport,
                src_ip);
         printf("\n");
+    }
+    if (e->connection_event) {
+        detect_portscan(e->daddr, e->dport);
     }
 
     return 0;
