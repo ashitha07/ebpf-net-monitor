@@ -46,12 +46,13 @@ sudo ./examples/c/tcp_trace
 - Connection burst detection
 
 ## How to Run
-
+```bash
 # Basic monitoring (JSON output only)
-sudo ./tcp_trace | python3 -u exporter.py --no-opensearch
+sudo bash -c './tcp_trace | python3 -u exporter.py --no-opensearch'
 
 # With OpenSearch indexing
 sudo bash -c './tcp_trace | python3 -u exporter.py'
 
 # With auto-blocking enabled
 sudo bash -c './tcp_trace | python3 -u exporter.py --block'
+```
