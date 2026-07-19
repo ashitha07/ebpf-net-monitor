@@ -37,4 +37,21 @@ sudo ./examples/c/tcp_trace
 - [x] Port scan detection with cooldown mechanism
 - [x] OpenSearch export with daily index rotation
 - [x] Memory management: stale entry TTL cleanup
-- [ ] iptables auto-blocking (next)
+- [x] iptables auto-blocking on detection (--block flag)
+
+## Future Enhancements
+- XDP-based pre-kernel blocking for known malicious IPs
+- Config-based IP whitelisting
+- Time compression detection (fast vs slow scans)
+- Connection burst detection
+
+## How to Run
+
+# Basic monitoring (JSON output only)
+sudo ./tcp_trace | python3 -u exporter.py --no-opensearch
+
+# With OpenSearch indexing
+sudo bash -c './tcp_trace | python3 -u exporter.py'
+
+# With auto-blocking enabled
+sudo bash -c './tcp_trace | python3 -u exporter.py --block'
