@@ -47,7 +47,7 @@ def main():
                 ip =  line.split()[-1]
                 print(f"Blocking IP: {line.split()[-1]}", flush=True)
                 result = subprocess.run(
-                     ["/sbin/iptables", "-A", "INPUT", "-s", ip, "-j", "DROP"],
+                     ["/sbin/iptables", "-A", "OUTPUT", "-d", ip, "-j", "DROP"],
                      capture_output=True, text=True)
                 if result.returncode != 0:
                     print(f"iptables error: {result.stderr}", flush=True)
