@@ -62,8 +62,8 @@ void detect_portscan(uint32_t src_ip, uint16_t dst_port){
             }
               
             if(!already_preset){
-                // Check   if the port count is greater than 20
-                if(entry->port_count >= 15) {  // Assuming 20 ports as the threshold for a port scan
+                // Check   if the port count is greater than 25
+                if(entry->port_count >= 25) {  // Assuming 25 ports as the threshold for a port scan
                 // Check if alerted is false then print and add port to the list
                     if(!entry->alerted) {
                         entry->alerted = true;
@@ -100,6 +100,8 @@ void detect_portscan(uint32_t src_ip, uint16_t dst_port){
                     if(entry->port_count < 30) {
                         entry->port_list[entry->port_count] = dst_port;
                         entry->port_count++;
+                                printf("DEBUG: port_count now %d for this IP\n", entry->port_count); // ADD THIS
+
                     }
                 }
             }
